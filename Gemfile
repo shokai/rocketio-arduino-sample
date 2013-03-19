@@ -1,10 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'foreman'
-gem 'rack'
+gem 'sinatra-rocketio'
 gem 'sinatra'
 gem 'thin'
-gem 'sinatra-rocketio', '>= 0.0.7'
 gem 'json'
 gem 'haml'
 gem 'sass'
