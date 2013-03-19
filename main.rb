@@ -1,16 +1,16 @@
 io = Sinatra::RocketIO
 
 EM::defer do
-  while !EM::reactor_running? do
-    sleep 1
-  end
+  puts "start!!!"
   arduino = ArduinoFirmata.connect ENV['ARDUINO']
   loop do
     light = arduino.analog_read 0
+    puts "light #{light}"
     io.push :light, light
     temp = arduino.analog_read(1).to_f*5*100/1024
+    puts "temp #{temp}"
     io.push :temp, temp
-    sleep 1
+    sleep 0.1
   end
 end
 
@@ -36,4 +36,3 @@ end
 get '/:source.css' do
   scss params[:source].to_sym
 end
-
