@@ -2,6 +2,11 @@ RocketIO + ArduinoFirmata
 =========================
 display real-time sensor values on WebBrowser
 
+* https://github.com/shokai/rocketio-arduino-sample
+
+
+Requirements
+------------
 * Ruby 1.8.7+
 * [Sinatra RocketIO](https://github.com/shokai/sinatra-rocketio)
 * [ArduinoFirmata on Ruby](https://github.com/shokai/arduino_firmata)
