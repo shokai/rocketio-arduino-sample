@@ -2,7 +2,12 @@ io = Sinatra::RocketIO
 
 ## Arduino sensors
 io.on :start do
-  arduino = ArduinoFirmata.connect ENV['ARDUINO'], :eventmachine => true
+  begin
+    arduino = ArduinoFirmata.connect ENV['ARDUINO'], :eventmachine => true
+  rescue => e
+    STDERR.puts "#{e.class} - #{e}"
+    next
+  end
   EM::add_periodic_timer 0.3 do
     light = arduino.analog_read 0
     $logger.debug "light : #{light}"
