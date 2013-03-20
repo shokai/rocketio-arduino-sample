@@ -1,7 +1,13 @@
+helpers do
+  def app_root
+    "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}#{env['SCRIPT_NAME']}"
+  end
+end
+
 io = Sinatra::RocketIO
 
 EM::defer do
-  arduino = ArduinoFirmata.connect ENV['ARDUINO'], :eventmachine => true, :nonblock_io => true
+  arduino = ArduinoFirmata.connect ENV['ARDUINO'], :eventmachine => true, :nonblock_io => false
   EM::add_periodic_timer 0.1 do
     light = arduino.analog_read 0
     puts "light : #{light}"
@@ -18,12 +24,6 @@ end
 
 io.on :disconnect do |session, type|
   puts "leave #{type} client #{session}"
-end
-
-helpers do
-  def app_root
-    "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}#{env['SCRIPT_NAME']}"
-  end
 end
 
 get '/' do
