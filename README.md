@@ -10,6 +10,8 @@ Requirements
 * Ruby 1.8.7+
 * [Sinatra RocketIO](https://github.com/shokai/sinatra-rocketio)
 * [ArduinoFirmata on Ruby](https://github.com/shokai/arduino_firmata)
+  * CdS - ADC0
+  * Temperature sensor LM35DZ - ADC1
 
 
 Install Dependencies
@@ -17,6 +19,7 @@ Install Dependencies
 
     % gem install bundler
     % bundle install
+
 
 Run
 ---
