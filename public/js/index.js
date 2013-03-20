@@ -14,6 +14,11 @@ io.on("arduino", function(data){
   $("#light").text("明るさ:"+data.light);
 });
 
+io.on("stat", function(data){
+  $("#cpu").text("CPU:"+data.cpu+"%");
+  $("#mem").text("メモリ:"+data.mem+"%");
+});
+
 io.on("clients", function(data){
   $("#websocket").text("websocket:"+data.websocket);
   $("#comet").text("comet:"+data.comet);

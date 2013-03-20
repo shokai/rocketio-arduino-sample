@@ -33,6 +33,19 @@ io.on :disconnect do |session, type|
   }
 end
 
+io.once :start do
+  EM::add_periodic_timer 10 do
+    pid = Process.pid
+    stat = `ps aux`.split(/[\r\n]/).map{|i|
+      i.split(/\s+/)[0...4]
+    }.select{|i|
+      i[1].to_i == pid
+    }[0]
+    user, pid_, cpu, mem, = stat
+    io.push :stat, {:cpu => cpu, :mem => mem}
+  end
+end
+
 get '/' do
   @title = "RocketIO+ArduinoFirmata"
   haml :index
