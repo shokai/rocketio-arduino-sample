@@ -19,7 +19,7 @@ end
 
 ## CPU status
 io.once :start do
-  EM::add_periodic_timer 10 do
+  EM::add_periodic_timer 5 do
     stat = `ps aux`.split(/[\r\n]/).map{|i|
       i.split(/\s+/)[0...4]
     }.select{|i|
