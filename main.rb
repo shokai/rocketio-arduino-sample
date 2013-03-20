@@ -21,6 +21,7 @@ io.once :start do
       i[1].to_i == Process.pid
     }[0]
     user, pid, cpu, mem, = stat
+    $logger.debug "cpu:#{cpu}, mem:#{mem}"
     io.push :stat, {:cpu => cpu, :mem => mem}
   end
 end
