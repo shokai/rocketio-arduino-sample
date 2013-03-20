@@ -1,15 +1,23 @@
 
-$font_black : #222;
+$font_white : rgb(200,200,200);
 
 @mixin content {
   div {
     margin : 10px;
-    font-size : 95%;
+    font-size : 130%;
   }
+}
+
+h1, h2, h3, h4 {
+  color : rgb(240,150,170)
+}
+
+a {
+  color : rgb(160,140,255);
 }
 
 body {
   @include content;
-  background-color : #EEE;
-  color : $font_black;
+  background-color : rgb(20,10,10);
+  color : $font_white;
 }

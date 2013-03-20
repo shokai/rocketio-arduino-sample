@@ -2,7 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     addressable (2.3.3)
-    arduino_firmata (0.2.6)
+    arduino_firmata (0.2.7)
       args_parser (>= 0.1.2)
       event_emitter (>= 0.2.2)
       serialport (>= 1.1.0)

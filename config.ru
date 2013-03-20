@@ -5,7 +5,6 @@ if development?
   $stdout.sync = true
   require 'sinatra/reloader'
 end
-require 'sinatra/content_for'
 require 'sinatra/rocketio'
 require File.expand_path 'main', File.dirname(__FILE__)
 

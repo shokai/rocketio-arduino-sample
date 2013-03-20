@@ -1,13 +1,22 @@
-- content_for :title do
-  = @title
+!!! XHTML
+%html
+  %head
+    %meta{'http-equiv' => 'Content-Type', :content => 'text/html', :charset => 'UTF-8'}
+    %title= @title
+    %link{:rel => 'stylesheet', :href => "#{app_root}/main.css", :type => 'text/css'}
+    %script{:type => 'text/javascript', :src => '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'}
+  %body
+    %div#header
+    %div#content
+      %div#main
+        %div
+          %div#temp
+          %div#light
+      %hr
+      %div#footer
+        %p
+          - src_url = 'https://github.com/shokai/rocketio-arduino-sample'
+          %a{:href => src_url} #{src_url}
+    %script{:src => rocketio_js}
+    %script{:src => "#{app_root}/js/index.js"}
 
-- content_for :html_foot do
-  %script{:src => rocketio_js}
-  %script{:src => "#{app_root}/js/index.js"}
-
-%div#header
-  %h1= @title
-%div#main
-  %div
-    %div#temp
-    %div#light

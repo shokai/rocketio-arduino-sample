@@ -1,16 +1,14 @@
 io = Sinatra::RocketIO
 
 EM::defer do
-  puts "start!!!"
-  arduino = ArduinoFirmata.connect ENV['ARDUINO']
-  loop do
+  arduino = ArduinoFirmata.connect ENV['ARDUINO'], :eventmachine => true, :nonblock_io => true
+  EM::add_periodic_timer 0.1 do
     light = arduino.analog_read 0
-    puts "light #{light}"
+    puts "light : #{light}"
     io.push :light, light
     temp = arduino.analog_read(1).to_f*5*100/1024
-    puts "temp #{temp}"
+    puts "temperature : #{temp}"
     io.push :temp, temp
-    sleep 0.1
   end
 end
 
