@@ -2,8 +2,11 @@ require 'rubygems'
 require 'bundler/setup'
 Bundler.require
 if development?
-  $stdout.sync = true
+  $logger = Logger.new $stdout
   require 'sinatra/reloader'
+else
+  $logger = Logger.new $stdout
+  $logger.level = Logger::INFO
 end
 require 'sinatra/rocketio'
 require File.expand_path 'main', File.dirname(__FILE__)

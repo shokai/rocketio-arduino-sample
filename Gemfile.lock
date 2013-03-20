@@ -29,6 +29,7 @@ GEM
     libwebsocket (0.1.7.1)
       addressable
       websocket
+    logger (1.2.8)
     multi_json (1.7.1)
     multi_xml (0.5.3)
     rack (1.5.2)
@@ -86,6 +87,7 @@ DEPENDENCIES
   foreman
   haml
   json
+  logger
   sass
   sinatra
   sinatra-rocketio

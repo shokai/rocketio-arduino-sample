@@ -7,23 +7,23 @@ end
 io = Sinatra::RocketIO
 
 EM::defer do
-  arduino = ArduinoFirmata.connect ENV['ARDUINO'], :eventmachine => true, :nonblock_io => false
+  arduino = ArduinoFirmata.connect ENV['ARDUINO'], :eventmachine => true
   EM::add_periodic_timer 0.1 do
     light = arduino.analog_read 0
-    puts "light : #{light}"
+    $logger.debug "light : #{light}"
     io.push :light, light
     temp = arduino.analog_read(1).to_f*5*100/1024
-    puts "temperature : #{temp}"
+    $logger.debug "temperature : #{temp}"
     io.push :temp, temp
   end
 end
 
 io.on :connect do |session, type|
-  puts "new #{type} client <#{session}>"
+  $logger.debug "new #{type} client <#{session}>"
 end
 
 io.on :disconnect do |session, type|
-  puts "leave #{type} client #{session}"
+  $logger.debug "leave #{type} client #{session}"
 end
 
 get '/' do
