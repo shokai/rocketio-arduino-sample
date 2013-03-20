@@ -24,9 +24,15 @@ io.on("clients", function(data){
   $("#comet").text("comet:"+data.comet);
 });
 
-var blink = false;
-io.on("*", function(event_name, data){
-  if(blink) $("#blink").html("..");
-  else $("#blink").html(".");
-  blink = !blink;
+var netstat = 0;
+io.on("*", function(event_name, data){ // catch all events
+  var s = "";
+  switch(netstat){
+  case 0: s = "."; break;
+  case 1: s = ".."; break;
+  case 2: s = "..."; break;
+  };
+  $("#netstat").html(s);
+  netstat++;
+  if(netstat > 2) netstat = 0;
 });

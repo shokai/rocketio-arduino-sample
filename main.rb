@@ -1,11 +1,6 @@
-helpers do
-  def app_root
-    "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}#{env['SCRIPT_NAME']}"
-  end
-end
-
 io = Sinatra::RocketIO
 
+## Arduino sensors
 io.on :start do
   arduino = ArduinoFirmata.connect ENV['ARDUINO'], :eventmachine => true
   EM::add_periodic_timer 0.3 do
@@ -14,6 +9,19 @@ io.on :start do
     temp = arduino.analog_read(1).to_f*5*100/1024
     $logger.debug "temperature : #{temp}"
     io.push :arduino, :temp => temp, :light => light
+  end
+end
+
+## CPU status
+io.once :start do
+  EM::add_periodic_timer 10 do
+    stat = `ps aux`.split(/[\r\n]/).map{|i|
+      i.split(/\s+/)[0...4]
+    }.select{|i|
+      i[1].to_i == Process.pid
+    }[0]
+    user, pid, cpu, mem, = stat
+    io.push :stat, {:cpu => cpu, :mem => mem}
   end
 end
 
@@ -33,15 +41,9 @@ io.on :disconnect do |session, type|
   }
 end
 
-io.once :start do
-  EM::add_periodic_timer 10 do
-    stat = `ps aux`.split(/[\r\n]/).map{|i|
-      i.split(/\s+/)[0...4]
-    }.select{|i|
-      i[1].to_i == Process.pid
-    }[0]
-    user, pid, cpu, mem, = stat
-    io.push :stat, {:cpu => cpu, :mem => mem}
+helpers do
+  def app_root
+    "#{env['rack.url_scheme']}://#{env['HTTP_HOST']}#{env['SCRIPT_NAME']}"
   end
 end
 
