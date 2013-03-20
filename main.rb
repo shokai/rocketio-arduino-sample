@@ -8,7 +8,7 @@ io = Sinatra::RocketIO
 
 EM::defer do
   arduino = ArduinoFirmata.connect ENV['ARDUINO'], :eventmachine => true
-  EM::add_periodic_timer 0.1 do
+  EM::add_periodic_timer 0.3 do
     light = arduino.analog_read 0
     $logger.debug "light : #{light}"
     io.push :light, light
