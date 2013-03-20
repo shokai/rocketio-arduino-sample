@@ -6,7 +6,7 @@ end
 
 io = Sinatra::RocketIO
 
-EM::defer do
+io.on :start do
   arduino = ArduinoFirmata.connect ENV['ARDUINO'], :eventmachine => true
   EM::add_periodic_timer 0.3 do
     light = arduino.analog_read 0
@@ -35,13 +35,12 @@ end
 
 io.once :start do
   EM::add_periodic_timer 10 do
-    pid = Process.pid
     stat = `ps aux`.split(/[\r\n]/).map{|i|
       i.split(/\s+/)[0...4]
     }.select{|i|
-      i[1].to_i == pid
+      i[1].to_i == Process.pid
     }[0]
-    user, pid_, cpu, mem, = stat
+    user, pid, cpu, mem, = stat
     io.push :stat, {:cpu => cpu, :mem => mem}
   end
 end
