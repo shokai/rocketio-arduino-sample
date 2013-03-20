@@ -11,10 +11,9 @@ EM::defer do
   EM::add_periodic_timer 0.3 do
     light = arduino.analog_read 0
     $logger.debug "light : #{light}"
-    io.push :light, light
     temp = arduino.analog_read(1).to_f*5*100/1024
     $logger.debug "temperature : #{temp}"
-    io.push :temp, temp
+    io.push :arduino, :temp => temp, :light => light
   end
 end
 

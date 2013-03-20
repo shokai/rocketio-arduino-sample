@@ -2,17 +2,26 @@ var io = new RocketIO().connect();
 
 io.on("connect", function(session){
   console.log("connect!! "+session);
+  $("#rocketio").text("接続:"+io.type);
 });
 
-io.on("temp", function(data){
-  $("#temp").text("気温:"+data+"度");
+io.on("disconnect", function(){
+  $("#rocketio").text("接続:close");
 });
 
-io.on("light", function(data){
-  $("#light").text("明るさ:"+data);
+io.on("arduino", function(data){
+  $("#temp").text("気温:"+data.temp+"度");
+  $("#light").text("明るさ:"+data.light);
 });
 
 io.on("clients", function(data){
   $("#websocket").text("websocket:"+data.websocket);
   $("#comet").text("comet:"+data.comet);
+});
+
+var blink = false;
+io.on("*", function(event_name, data){
+  if(blink) $("#blink").html("..");
+  else $("#blink").html(".");
+  blink = !blink;
 });
