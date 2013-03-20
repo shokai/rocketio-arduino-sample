@@ -34,7 +34,7 @@ io.on :disconnect do |session, type|
 end
 
 get '/' do
-  @title = "sensors"
+  @title = "RocketIO+ArduinoFirmata"
   haml :index
 end
 
