@@ -11,3 +11,8 @@ io.on("temp", function(data){
 io.on("light", function(data){
   $("#light").text("明るさ:"+data);
 });
+
+io.on("clients", function(data){
+  $("#websocket").text("websocket:"+data.websocket);
+  $("#comet").text("comet:"+data.comet);
+});
