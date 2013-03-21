@@ -1,7 +1,7 @@
 io = Sinatra::RocketIO
 
 ## Arduino sensors
-io.on :start do
+io.once :start do
   begin
     arduino = ArduinoFirmata.connect ENV['ARDUINO'], :eventmachine => true
   rescue => e
