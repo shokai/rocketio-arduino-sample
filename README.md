@@ -26,9 +26,16 @@ Run
 
     % rackup config.ru -p 5000
 
-open http://localhost:5000
+=> http://localhost:5000
 
 
 config WebSocket port and Arduino
 
     % ARDUINO=/dev/tty.usb-devicename WS_PORT=8080 rackup config.ru -p 5000
+
+
+CUI Client
+----------
+
+    % ruby bin/client.rb
+    % ruby bin/client.rb http://localhost:5000 comet
