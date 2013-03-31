@@ -31,19 +31,19 @@ io.once :start do
   end
 end
 
-io.on :connect do |session, type|
-  $logger.debug "new #{type} client <#{session}>"
+io.on :connect do |client|
+  $logger.debug "new #{client.type} client <#{client.session}>"
   io.push :clients, {
-    :websocket => Sinatra::WebSocketIO.sessions.size,
-    :comet => Sinatra::CometIO.sessions.size
+    :websocket => io.sessions[:websocket].size,
+    :comet => io.sessions[:comet].size
   }
 end
 
-io.on :disconnect do |session, type|
-  $logger.debug "leave #{type} client #{session}"
+io.on :disconnect do |client|
+  $logger.debug "leave #{client.type} client #{client.session}"
   io.push :clients, {
-    :websocket => Sinatra::WebSocketIO.sessions.size,
-    :comet => Sinatra::CometIO.sessions.size
+    :websocket => io.sessions[:websocket].size,
+    :comet => io.sessions[:comet].size
   }
 end
 
