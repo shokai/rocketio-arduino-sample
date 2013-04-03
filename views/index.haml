@@ -23,6 +23,8 @@
         %p
           - src_url = 'https://github.com/shokai/rocketio-arduino-sample'
           %a{:href => src_url} #{src_url}
+          %span
+            (RocketIO v#{Sinatra::RocketIO::VERSION})
     %script{:type => 'text/javascript', :src => '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'}
     %script{:src => rocketio_js}
     %script{:src => "#{app_root}/js/index.js"}
