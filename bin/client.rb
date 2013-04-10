@@ -8,8 +8,8 @@ type = ARGV.shift || :websocket  # :comet or :websocket
 io = Sinatra::RocketIO::Client.new(url, :type => type).connect
 puts "#{io.url} waiting.."
 
-io.on :connect do |session|
-  puts "#{io.type} connect <#{session}>"
+io.on :connect do
+  puts "#{io.type} connect <#{io.session}>"
 end
 
 io.on :arduino do |data|
