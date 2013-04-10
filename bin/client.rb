@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require 'bundler'
+require 'bundler/setup'
 require 'sinatra/rocketio/client'
 
 url = ARGV.shift || 'http://localhost:5000'
