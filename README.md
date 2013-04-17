@@ -31,7 +31,7 @@ Run
 
 config WebSocket port and Arduino
 
-    % ARDUINO=/dev/tty.usb-devicename WS_PORT=8080 rackup config.ru -p 5000
+    % ARDUINO=/dev/tty.usb-devicename WS_PORT=5001 rackup config.ru -p 5000
 
 
 CUI Client
